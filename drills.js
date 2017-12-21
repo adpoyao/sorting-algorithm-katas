@@ -24,50 +24,63 @@ function bubbleSort(array){
 
 //Merge Sort
 function mergeSort(array){
-    if(array.length <= 1){
-        return array
-    }
-    let mid = Math.floor((array.length)/2)
-    let left = array.slice(0, mid);
-    let right = array.slice(mid, array.length)
+  if(array.length <= 1){
+    return array;
+  }
+  let mid = Math.floor(array.length/2);
+  let left = array.slice(0, mid);
+  let right = array.slice(mid, array.length);
 
-    left = mergeSort(left)
-    right = mergeSort(right)
-
-    return merge(left, right, array)
+  left = mergeSort(left);
+  right = mergeSort(right);
+  return merge(left, right, array);
 }
 
 function merge(left, right, array){
-    
-    let leftIndex = 0 
-    let rightIndex = 0 
-    let outputIndex = 0
-    // [1,4,3] [2,5,6]
-    while(leftIndex < left.length && rightIndex < right.length){
-        if(left[leftIndex] < right[rightIndex]){
-            array[outputIndex++] = left[leftIndex]
-        }
-        else {
-            array[outputIndex++] = right[rightIndex]
-        }
-
+  let leftIndex = 0;
+  let rightIndex = 0;
+  let outputIndex = 0;
+  // [1,4,3] [2,5,6]
+  while(leftIndex < left.length && rightIndex < right.length){
+    if(left[leftIndex] < right[rightIndex]){
+      array[outputIndex++] = left[leftIndex];
     }
-    for(let i = leftIndex; i < left.length; i++){
-        array[outputIndex++] = left[i];
+    else {
+      array[outputIndex++] = right[rightIndex];
     }
-    for(leti - rightIndex; i < right.length; i++){
-        array[outputIndex++] = right[i];
-    }
-
-    return array
+  }
+  for(let i = leftIndex; i < left.length; i++){
+    array[outputIndex++] = left[i];
+  }
+  for(let i = rightIndex; i < right.length; i++){
+    array[outputIndex++] = right[i];
+  }
+  return array;
 }
 
 
 //Quick Sort + Swap
-function quickSort(){
-
+[1, 2, 3, 7, 4]; //length: 5
+function quickSort(array, start=0, end=array.length-1){
+  //base case
+  if(start >= end){
+    return array;
+  }
+  const middle = partition(array, start, end);
+  array = quickSort(array, start, middle);
+  array = quickSort(array, middle+1, end);
+  return array;
 }
 
-function partition(){
-
+function partition(array, start, end){
+  let pivot = array[end];
+  let j = start;
+  for(let i=start; i < end; i++){
+    if(array[i] <= pivot){
+      swap(array, i, j);
+      j++;
+    }
+  }
+  swap(array, end, j);
+  return j;
 }
