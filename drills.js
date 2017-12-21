@@ -84,3 +84,25 @@ function partition(array, start, end){
   swap(array, end, j);
   return j;
 }
+
+//EXERCISE 1
+
+function sortWithMinMax(array, max, min){
+  const tempArray = Array(max - min+1);
+  const newArray = [];
+  for(let i=0; i < array.length; i++){
+    tempArray[array[i]-min] = 'x';
+  }
+  for(let i=0; i < tempArray.length; i++){
+    if(tempArray[i] === 'x'){
+      newArray.push(i+min);
+    }
+  }
+  return newArray;
+}
+
+const test1= [ 3, 7, 5, 2];
+const test2 = [-1, 2, 6, 4, 8];
+
+console.log(sortWithMinMax(test1, 7, 2));
+console.log(sortWithMinMax(test2, 8, -1));
